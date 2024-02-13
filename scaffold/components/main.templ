@@ -1,0 +1,34 @@
+package components
+
+templ CurrentCount(n string) {
+	<span id="current-count" name="count">{ n }</span>
+}
+
+templ Counter() {
+	@Root() {
+		<div class="">
+			@CurrentCount("0")
+			<button hx-target="#current-count" hx-swap="outerHTML" hx-put="/counter?action=incrriment">Incriment</button>
+			<button hx-target="#current-count" hx-swap="outerHTML" hx-put="/counter?action=decriment">Decriment</button>
+			<button hx-target="#current-count" hx-swap="outerHTML" hx-delete="/counter">Reset</button>
+			<form hx-post="/counter" hx-target="#current-count" hx-swap="outerHTML">
+				<label class="text-md">
+					Custom number 
+					<input name="new-count" type="number" placeholder="9"/>
+				</label>
+				<button type="submit">Submit</button>
+			</form>
+		</div>
+	}
+}
+
+templ Root() {
+	<!DOCTYPE html>
+	<html lang="en">
+		<script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+		<script>htmx.logAll()</script>
+		<body>
+			{ children... }
+		</body>
+	</html>
+}

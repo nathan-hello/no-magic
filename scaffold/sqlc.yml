@@ -1,0 +1,11 @@
+version: '2'
+sql:
+- schema: db/schema.sql
+  queries: db/queries.sql
+  engine: postgresql
+  database:
+    uri: ${DB_URI}
+  gen:
+    go:
+      package: db
+      out: db/
